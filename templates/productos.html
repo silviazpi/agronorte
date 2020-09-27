@@ -1,0 +1,73 @@
+{% extends "base.html" %} 
+
+{% load static}
+
+{% block head_title %}Productos Agro Importaciones{% endblock %} {% block extra_body %}
+<h1 class="text-center tarjeta titulo-pag">Productos</h1>
+<div class="row">
+<form class="form-inline my-2 my-md-0" method="GET" action="/productos/">
+    <input class="form-control" type="text" placeholder="Buscar ej. Bison" aria-label="Search" name="p">
+  </form>
+<ul class="navbar-nav ml-auto" style="cursor: pointer;margin-left: 20px!important; margin-top: 10px;">
+  <li class="nav-item dropdown">
+    <a class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Filtrar productos
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="/productos?c=Labor de suelo" style="font-weight: bold;">Labor de suelo</a>
+        <a class="dropdown-item" href="/productos?s=Gradas rápidas">Gradas rápidas</a>
+        <a class="dropdown-item" href="/productos?s=Gradas lentas">Gradas lentas</a>
+        <a class="dropdown-item" href="/productos?s=Arados">Arados</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/productos?c=Siembra" style="font-weight: bold;">Siembra</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/productos?c=Transporte" style="font-weight: bold;">Transporte</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/productos?c=Ganaderia" style="font-weight: bold;">Equipos para la ganadería</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/productos?c=Accesorios" style="font-weight: bold;">Accesorios</a>
+    </div>
+</li>
+</ul>
+</div>
+<hr>
+{% if not productos %}
+<h1 class="text-center" style="width: 80%; margin:auto; padding-top: 30px; font-size: 3rem; color: lightgrey;">Lo sentimos, no hemos encontrado ningún producto con estas características</h1>
+    {% else %}
+<div class="row">
+    
+    {% for producto in productos %}
+    
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="card tarjeta">
+            <a href="{{ producto.get_absolute_url }}">
+                <div class="">
+                    <img src="{{ producto.foto1.url }}" class="card-img-top">
+
+                    <div class=""></div>
+            </a>
+            </div>
+
+            <div class="card-body text-center">
+                <h5>
+                    <strong>
+              <a href="{{ producto.get_absolute_url }}" class="dark-grey-text">{{ producto.nombre }}</a>
+            </strong>
+                </h5>
+                <a href="/productos?q={{ producto.categoria }}" class="categoria">
+                    {{ producto.categoria }}
+                </a>
+                <br>
+                <a href="/productos?m={{ producto.marca }}" class="marca">
+                    {{ producto.marca }}
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock extra_body %}

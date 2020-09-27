@@ -1,0 +1,152 @@
+{% extends "base.html" %} 
+
+
+{% block head_title %}{{ producto.nombre }}{% endblock %}
+
+{% block extra_head %}
+<style type="text/css">
+    img {
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+   }
+   
+    .product-image {
+        display: none;
+   }
+    .image-list li {
+        margin: 0;
+   }
+    @media (min-width: 780px) {
+        .product-image img, .image-list img {
+            width: 100%;
+       }
+        .product-image {
+            display: block;
+       }
+        .product-image img {
+            height: 52vh;
+       }
+        .product-image img.active {
+            display: block;
+            margin: 0 0 0.75rem 0;
+       }
+        .image-list {
+            display: flex;
+            overflow: hidden;
+       }
+        .image-list li {
+            margin: 0 0.75rem 0 0;
+            flex-basis: 100%;
+       }
+        .image-list li:nth-child(3) {
+            margin: 0;
+       }
+        .image-list img {
+            height: 10rem;
+            width: 100%;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+       }
+        .image-list img:hover {
+            opacity: 0.7;
+       }
+       
+   }
+ 
+   ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+</style>
+{% endblock %}
+
+{% block extra_body %}
+
+<main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">        
+
+                <div class="product-gallery">
+                  <div class="product-image">
+                    <img class="active" src="{{ producto.foto1.url }}">
+                  </div>
+                  <ul class="image-list">
+                    <li class="image-item" ><img src="{{ producto.foto1.url }}"></li>
+                    <li class="image-item"><img src="{{ producto.foto2.url }}"></li>
+                    <li class="image-item"><img src="{{ producto.foto3.url }}"></li>
+                  </ul>
+                </div>
+              </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+                <!--Content-->
+                <div class="p-4">
+                    <h1>{{ producto.nombre }}</h1>
+                    <div class="mb-3">
+                        <a href="">
+                            <span class="badge mr-1">{{ producto.nombre_categoria }}</span>
+                        </a>
+                    </div>
+
+                    <p class="lead font-weight-bold">Descripción</p>
+
+                    <p>{{ producto.descripcion }}</p>
+                    {% if producto.documentacion %}
+                     <a href="{{ producto.documentacion.url }}"> Documentación asociada </a>
+                    {% endif %}
+                </div>
+                <!--Content-->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+        <hr>
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-6 text-center">
+
+                <h4 class="my-4 h4">Qué nos diferencia</h4>
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit voluptates, quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+    </div>
+</main>
+{% endblock extra_body %}
+
+{% block extra_scripts %}
+
+<script type="text/javascript">
+    const activeImage = document.querySelector(".product-image .active");
+    const productImages = document.querySelectorAll(".image-list img");
+
+    function changeImage(e) {
+    activeImage.src = e.target.src;
+    }
+
+    productImages.forEach(image => image.addEventListener("click", changeImage));
+</script>
+
+
+{% endblock extra_scripts %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block head_title %}Productos Agro Importaciones{% endblock %} {% block extra_body %}
+<h1 class="text-center tarjeta titulo-pag">Productos de Ocasión</h1>
+<form class="form-inline my-2 my-md-0" method="GET" action="/productos/">
+    <input class="form-control" type="text" placeholder="Buscar ej. Bison" aria-label="Search" name="p">
+</form>
+<div class="row">
+
+    {% for chollo in chollos %}
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="card tarjeta">
+            <a href="{{ chollo.get_absolute_url }}">
+                <div class="">
+                    <img src="{{ chollo.foto.url }}" class="card-img-top">
+
+                </div>
+            </a>
+        
+
+        <div class="card-body text-center">
+            <h5>
+                <strong>
+                    <a href="{{ chollo.get_absolute_url }}" class="dark-grey-text">{{ chollo.nombre }}</a>
+                </strong>
+            </h5>
+            <br>
+            <p>{{ chollo.marca }}</p>
+            
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock extra_body %}

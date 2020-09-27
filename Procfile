@@ -1,0 +1,1 @@
+web: gunicorn AgroImp.wsgi --log-file -
